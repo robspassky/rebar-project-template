@@ -10,7 +10,7 @@ build: deps
 	rebar compile
 
 package: build
-	rebar generate
+	rebar generate -f
 
 console: package
 	rel/{{projectid}}/bin/{{projectid}} console

@@ -1,0 +1,72 @@
+This is a rebar template designed to create a project like RJ's erlang_rebar_example_project. (https://github.com/RJ/erlang_rebar_example_project).
+
+I'm putting in various tweaks as I feel necessary.
+
+The created project is meant to compile and work out-of-the-box.  I'd have it be an echo server or something but don't have time to spare right now for it.
+
+Usage:
+
+1. Clone this repository into your .rebar/templates directory.  If it doesn't already exist, I think you can do this with the following command line:
+
+git clone https://github.com/robspassky/rebar-project-template.git ~/.rebar/templates 
+
+2. Run it:
+
+rebar create template=project projectid=projectnamehere
+
+3. Sample session:
+
+robspassky@carmine:/tmp$ rebar create template=project projectid=projectnamehere
+==> tmp (create)
+Writing projectnamehere/Makefile
+Writing projectnamehere/.gitignore
+Writing projectnamehere/rebar.config
+Writing projectnamehere/apps/projectnamehere/src/projectnamehere.app.src
+Writing projectnamehere/apps/projectnamehere/src/projectnamehere.erl
+Writing projectnamehere/apps/projectnamehere/src/projectnamehere_app.erl
+Writing projectnamehere/apps/projectnamehere/src/projectnamehere_sup.erl
+Writing projectnamehere/apps/projectnamehere/src/projectnamehere_server.erl
+Writing projectnamehere/rel/files/vm.args
+Writing projectnamehere/rel/reltool.config
+Writing projectnamehere/rel/files/app.config
+Writing projectnamehere/rel/files/erl
+Writing projectnamehere/rel/files/nodetool
+Writing projectnamehere/rel/files/projectnamehere
+robspassky@carmine:/tmp$ cd projectnamehere/
+robspassky@carmine:/tmp/projectnamehere$ make && make console
+rebar clean
+==> projectnamehere (clean)
+==> rel (clean)
+==> projectnamehere (clean)
+rebar get-deps
+==> projectnamehere (get-deps)
+==> rel (get-deps)
+==> projectnamehere (get-deps)
+rebar compile
+==> projectnamehere (compile)
+Compiled src/projectnamehere.erl
+Compiled src/projectnamehere_app.erl
+Compiled src/projectnamehere_sup.erl
+Compiled src/projectnamehere_server.erl
+==> rel (compile)
+==> projectnamehere (compile)
+rebar generate -f
+==> rel (generate)
+rebar get-deps
+==> projectnamehere (get-deps)
+==> rel (get-deps)
+==> projectnamehere (get-deps)
+rebar compile
+==> projectnamehere (compile)
+==> rel (compile)
+==> projectnamehere (compile)
+rebar generate -f
+==> rel (generate)
+rel/projectnamehere/bin/projectnamehere console
+Exec: /tmp/projectnamehere/rel/projectnamehere/erts-5.8.4/bin/erlexec -boot /tmp/projectnamehere/rel/projectnamehere/releases/0.1.0/projectnamehere -embedded -config /tmp/projectnamehere/rel/projectnamehere/etc/app.config -args_file /tmp/projectnamehere/rel/projectnamehere/etc/vm.args -- console
+Root: /tmp/projectnamehere/rel/projectnamehere
+Erlang R14B03 (erts-5.8.4) [source] [64-bit] [smp:12:12] [rq:12] [async-threads:5] [hipe] [kernel-poll:true]
+
+Eshell V5.8.4  (abort with ^G)
+(projectnamehere@127.0.0.1)1> 
+
