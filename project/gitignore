@@ -1,0 +1,6 @@
+ebin
+rel/{{projectid}}
+*.bean
+*~
+deps
+erl_crash.dump

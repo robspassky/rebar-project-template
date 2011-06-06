@@ -1,0 +1,40 @@
+%% -*- erlang -*-
+
+%%
+%% project template
+%%
+%% Sets up boilerplate for a distributed erlang application that
+%% supports hot upgrades.
+%%
+%% Example:
+%%
+%%   rebar create template=project projectid=superfly
+%%
+
+{variables, [{projectid, "myproj"}]}.
+
+% Build Files
+{template, "project/Makefile",          "{{projectid}}/Makefile"}.
+{template, "project/gitignore",         "{{projectid}}/.gitignore"}.
+{template, "project/rebar.config",      "{{projectid}}/rebar.config"}.
+
+% App Files
+{template, "project/myproj.app.src",    "{{projectid}}/apps/{{projectid}}/src/{{projectid}}.app.src"}.
+{template, "project/myproj.erl",        "{{projectid}}/apps/{{projectid}}/src/{{projectid}}.erl"}.
+{template, "project/myproj_app.erl",    "{{projectid}}/apps/{{projectid}}/src/{{projectid}}_app.erl"}.
+{template, "project/myproj_sup.erl",    "{{projectid}}/apps/{{projectid}}/src/{{projectid}}_sup.erl"}.
+{template, "project/myproj_server.erl", "{{projectid}}/apps/{{projectid}}/src/{{projectid}}_server.erl"}.
+
+% Release files
+{template, "project/vm.args",           "{{projectid}}/rel/files/vm.args"}.
+{template, "project/reltool.config",    "{{projectid}}/rel/reltool.config"}.
+{template, "project/app.config",        "{{ projectid}}/rel/files/app.config"}.
+
+{file,     "project/erl.script",        "{{projectid}}/rel/files/erl"}.
+{chmod,    8#744,                       "{{projectid}}/rel/files/erl"}.
+
+{file,     "project/nodetool",          "{{projectid}}/rel/files/nodetool"}.
+{chmod,    8#744,                       "{{projectid}}/rel/files/nodetool"}.
+
+{file,     "project/runner",            "{{projectid}}/rel/files/{{projectid}}"}.
+{chmod,    8#744,                       "{{projectid}}/rel/files/{{projectid}}"}.
