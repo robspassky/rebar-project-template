@@ -1,0 +1,13 @@
+{application, {{projectid}},
+ [
+  {description, "An erlang web service."},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib,
+		  cowboy
+                 ]},
+  {mod, { {{projectid}}_app, []}},
+  {env, []}
+ ]}.
