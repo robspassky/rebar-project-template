@@ -14,28 +14,29 @@
 {variables, [{projectid, "myproj"}]}.
 
 % Build Files
-{template, "project/Makefile",          "{{projectid}}/Makefile"}.
-{template, "project/gitignore",         "{{projectid}}/.gitignore"}.
-{template, "project/rebar.config",      "{{projectid}}/rebar.config"}.
+{template, "webservice-project/Makefile",          "{{projectid}}/Makefile"}.
+{template, "webservice-project/gitignore",         "{{projectid}}/.gitignore"}.
+{template, "webservice-project/rebar.config",      "{{projectid}}/rebar.config"}.
 
 % App Files
-{template, "project/myproj.app.src",    "{{projectid}}/apps/{{projectid}}/src/{{projectid}}.app.src"}.
-{template, "project/myproj.erl",        "{{projectid}}/apps/{{projectid}}/src/{{projectid}}.erl"}.
-{template, "project/myproj_app.erl",    "{{projectid}}/apps/{{projectid}}/src/{{projectid}}_app.erl"}.
-{template, "project/myproj_sup.erl",    "{{projectid}}/apps/{{projectid}}/src/{{projectid}}_sup.erl"}.
-{template, "project/myproj_cowboy.erl", "{{projectid}}/apps/{{projectid}}/src/{{projectid}}_cowboy.erl"}.
-{template, "project/myproj_cowboy_default.erl", "{{projectid}}/apps/{{projectid}}/src/{{projectid}}_cowboy_default.erl"}.
+{template, "webservice-project/myproj.app.src",    "{{projectid}}/apps/{{projectid}}/src/{{projectid}}.app.src"}.
+{template, "webservice-project/myproj.erl",        "{{projectid}}/apps/{{projectid}}/src/{{projectid}}.erl"}.
+{template, "webservice-project/myproj_app.erl",    "{{projectid}}/apps/{{projectid}}/src/{{projectid}}_app.erl"}.
+{template, "webservice-project/myproj_sup.erl",    "{{projectid}}/apps/{{projectid}}/src/{{projectid}}_sup.erl"}.
+{template, "webservice-project/myproj_cowboy.erl", "{{projectid}}/apps/{{projectid}}/src/{{projectid}}_cowboy.erl"}.
+{template, "webservice-project/myproj_cowboy_default.erl", "{{projectid}}/apps/{{projectid}}/src/{{projectid}}_cowboy_default.erl"}.
+{template, "webservice-project/my-first-page.html", "{{projectid}}/apps/{{projectid}}/priv/htdocs/my-first-page.html"}.
 
 % Release files
-{template, "project/vm.args",           "{{projectid}}/rel/files/vm.args"}.
-{template, "project/reltool.config",    "{{projectid}}/rel/reltool.config"}.
-{template, "project/app.config",        "{{ projectid}}/rel/files/app.config"}.
+{template, "webservice-project/vm.args",           "{{projectid}}/rel/files/vm.args"}.
+{template, "webservice-project/reltool.config",    "{{projectid}}/rel/reltool.config"}.
+{template, "webservice-project/app.config",        "{{ projectid}}/rel/files/app.config"}.
 
-{file,     "project/erl.script",        "{{projectid}}/rel/files/erl"}.
+{file,     "webservice-project/erl.script",        "{{projectid}}/rel/files/erl"}.
 {chmod,    8#744,                       "{{projectid}}/rel/files/erl"}.
 
-{file,     "project/nodetool",          "{{projectid}}/rel/files/nodetool"}.
+{file,     "webservice-project/nodetool",          "{{projectid}}/rel/files/nodetool"}.
 {chmod,    8#744,                       "{{projectid}}/rel/files/nodetool"}.
 
-{file,     "project/runner",            "{{projectid}}/rel/files/{{projectid}}"}.
+{file,     "webservice-project/runner",            "{{projectid}}/rel/files/{{projectid}}"}.
 {chmod,    8#744,                       "{{projectid}}/rel/files/{{projectid}}"}.

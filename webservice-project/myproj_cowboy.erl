@@ -5,7 +5,12 @@
 	]).
 
 start_link() ->
-    {ok, DocRoot} = application:get_env({{projectid}}, docroot),
+    case application:get_env({{projectid}}, docroot) of
+	{ok, DocRootString} -> 
+	    DocRoot = DocRootString;
+	undefined -> 
+	    DocRoot = list_to_binary(code:priv_dir({{projectid}}) ++ "/htdocs")
+    end,
     {ok, FileReadBuffer} = application:get_env({{projectid}}, filereadbuffer),
     {ok, Port} = application:get_env({{projectid}}, port),
     {ok, NumAcceptors} = application:get_env({{projectid}}, numacceptors),
