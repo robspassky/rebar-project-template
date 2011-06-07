@@ -155,4 +155,3 @@ robspassky@carmine:~/Work/erlang$ curl http://carmine:6969/my-first-page.html
     <h2>This page is located in code:priv_dir(projectnamehere)/index.html unless the default docroot was overriden in app.config.</h2>
   </body>
 </html>
-r

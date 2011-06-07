@@ -1,10 +1,10 @@
 -module({{projectid}}_cowboy).
 
 -export([
-	 start_link/0
+	 init/0
 	]).
 
-start_link() ->
+init() ->
     case application:get_env({{projectid}}, docroot) of
 	{ok, DocRootString} -> 
 	    DocRoot = DocRootString;
@@ -12,8 +12,8 @@ start_link() ->
 	    DocRoot = list_to_binary(code:priv_dir({{projectid}}) ++ "/htdocs")
     end,
     {ok, FileReadBuffer} = application:get_env({{projectid}}, filereadbuffer),
-    {ok, Port} = application:get_env({{projectid}}, port),
-    {ok, NumAcceptors} = application:get_env({{projectid}}, numacceptors),
+    {ok, Port}           = application:get_env({{projectid}}, port),
+    {ok, NumAcceptors}   = application:get_env({{projectid}}, numacceptors),
     Dispatch = 
 	[ 
 	  {'_',    % Any virtual host

@@ -1,5 +1,7 @@
 -module({{projectid}}_sup).
 
+%%% This supervisor will execute {{projectid}}:start_link/0.
+
 -behaviour(supervisor).
 
 %% API
@@ -24,6 +26,6 @@ start_link() ->
 
 init([]) ->
     Children = [
-		?CHILD({{projectid}}_cowboy, worker) 
+		?CHILD({{projectid}}, worker) 
 		],
     {ok, { {one_for_one, 5, 10}, Children} }.
