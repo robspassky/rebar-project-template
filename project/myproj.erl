@@ -2,7 +2,8 @@
 
 %% Public Module -- Main  public API should go here
 -export([
-	 start/0
+	 start/0,
+	 start_link/0
 	]).
 
 %% ===================================================================
@@ -10,4 +11,7 @@
 %% ===================================================================
 
 start() ->
-    {{projectid}}_sup:start_link().
+    {{projectid}}_server:init().
+
+start_link() ->
+    {{projectid}}_server:init().
