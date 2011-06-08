@@ -7,19 +7,19 @@ The created project is meant to compile and work out-of-the-box.  I'd have it be
 
 Usage:
 
-1. Clone this repository into your .rebar/templates directory.  If it doesn't already exist, I think you can do this with the following command line:
+* Clone this repository into your .rebar/templates directory.  If it doesn't already exist, I think you can do this with the following command line:
 
 ``` shell
 git clone https://github.com/robspassky/rebar-project-template.git ~/.rebar/templates
 ```
 
-2. Run it:
+* Run it:
 
 ``` shell
 rebar create template=project projectid=projectnamehere
 ```
 
-3. Sample session:
+* Sample session:
 
 ``` shell
 robspassky@carmine:/tmp$ rebar create template=project projectid=projectnamehere
@@ -77,7 +77,7 @@ Eshell V5.8.4  (abort with ^G)
 (projectnamehere@127.0.0.1)1> 
 ```
 
-4. Added "webservice-project " to project template.
+* Added "webservice-project " to project template.
 
 ``` shell
 robspassky@carmine:/tmp/foo$ rebar create template=webservice-project projectid=projectnamehere
