@@ -52,6 +52,7 @@ NODETOOL="$ERTS_PATH/escript $ERTS_PATH/nodetool $NAME_ARG $COOKIE_ARG"
 
 # Check the first argument for instructions
 case "$1" in
+
     start)
         # Make sure there is not already a node running
         RES=`$NODETOOL ping`
