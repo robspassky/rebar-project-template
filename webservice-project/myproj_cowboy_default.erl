@@ -38,7 +38,9 @@ handle(Req, S) ->
     {FullPath, Req1} = get_full_path(Req, S),
     case open_file(FullPath) of
 	{ok, IoDevice} -> reply_full_file(Req1, FullPath, IoDevice, S);
-	error          -> reply_error(Req1, S)
+	{error, Reason} -> error_logger:error_report([{file, FullPath}, {reason, Reason}]),
+			   reply_error(Req1, S);
+	_ -> error_logger:error_report([{file, FullPath}, {reason, "unkown file:open error"}])
     end.
 
 terminate(_Req, _State) ->
