@@ -17,12 +17,3 @@ console: clean package
 
 console_clean: clean package
 	rel/{{projectid}}/bin/{{projectid}} console_clean
-
-dialyze: clean build-plt
-	rebar compile debug_info=1
-	rebar dialyze skip_deps=true
-	rebar clean
-
-build-plt:
-	rebar build-plt skip_deps=true
-
