@@ -1,21 +1,27 @@
-This is a rebar template designed to create a project like RJ's erlang_rebar_example_project. (https://github.com/RJ/erlang_rebar_example_project).
+rebar-project-template
+======================
 
-I'm putting in various tweaks as I feel necessary.
+This is a set of rebar templates for distributed applications.  They build on RJ's erlang_rebar_example_project (https://github.com/RJ/erlang_rebar_example_project) with some tweaks.
 
 The created project is meant to compile and work out-of-the-box.  I'd have it be an echo server or something but don't have time to spare right now for it.
 
 Usage:
 
-1. Clone this repository into your .rebar/templates directory.  If it doesn't already exist, I think you can do this with the following command line:
+# Clone this repository into your .rebar/templates directory.  If it doesn't already exist, I think you can do this with the following command line:
 
-git clone https://github.com/robspassky/rebar-project-template.git ~/.rebar/templates 
+``` shell
+git clone https://github.com/robspassky/rebar-project-template.git ~/.rebar/templates
+```
 
-2. Run it:
+# Run it:
 
+``` shell
 rebar create template=project projectid=projectnamehere
+```
 
-3. Sample session:
+# Sample session:
 
+``` shell
 robspassky@carmine:/tmp$ rebar create template=project projectid=projectnamehere
 ==> tmp (create)
 Writing projectnamehere/Makefile
@@ -69,9 +75,11 @@ Erlang R14B03 (erts-5.8.4) [source] [64-bit] [smp:12:12] [rq:12] [async-threads:
 
 Eshell V5.8.4  (abort with ^G)
 (projectnamehere@127.0.0.1)1> 
+```
 
+# Added "webservice-project " to project template.
 
-4. Added "webservice-project " to project template.
+``` shell
 robspassky@carmine:/tmp/foo$ rebar create template=webservice-project projectid=projectnamehere
 ==> foo (create)
 Writing projectnamehere/Makefile
@@ -141,10 +149,11 @@ Erlang R14B03 (erts-5.8.4) [source] [64-bit] [smp:12:12] [rq:12] [async-threads:
 Cowboy (<0.46.0>) is listening on port 6969 with 100 acceptors, a document root of /tmp/foo/projectnamehere/rel/projectnamehere/lib/projectnamehere-0.1.0/priv/htdocs and a file read buffer of 64768 bytes.
 Eshell V5.8.4  (abort with ^G)
 (projectnamehere@carmine)1>
+```
 
+Then, in another terminal...
 
-
-((IN ANOTHER TERMINAL...))
+``` shell
 robspassky@carmine:~/Work/erlang$ curl http://carmine:6969/my-first-page.html
 <html>
   <head>
@@ -155,3 +164,4 @@ robspassky@carmine:~/Work/erlang$ curl http://carmine:6969/my-first-page.html
     <h2>This page is located in code:priv_dir(projectnamehere)/index.html unless the default docroot was overriden in app.config.</h2>
   </body>
 </html>
+```
