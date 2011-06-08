@@ -1,6 +1,8 @@
 ebin
 rel/{{projectid}}
-*.bean
+*.beam
 *~
 deps
 erl_crash.dump
+*/#*#
+#*#
