@@ -18,9 +18,6 @@ console: clean package
 console_clean: clean package
 	rel/{{projectid}}/bin/{{projectid}} console_clean
 
-devconsole: clean package
-	erl -pa deps/*/ebin -pa apps/*/ebin -boot start_sasl -s {{projectid}}
-
 dialyze: clean build-plt
 	rebar compile debug_info=1
 	rebar dialyze skip_deps=true

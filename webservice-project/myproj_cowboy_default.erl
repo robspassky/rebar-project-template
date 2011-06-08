@@ -8,45 +8,37 @@
 %% lifted from misultin:misultin_utility.erl
 %%
 
-%%% Exports
-
+%%
 %% API
-
+%%
 -export([
 	 init/3,
 	 handle/2,
 	 terminate/2
 	]).
 
+%%
 %% Dev API
-
+%%
 -export([
-	 doit/2
+	 do_test/2
 	]).
 
 
 -record(state, {docroot, filereadbuffer}).
 
-%%% Implementation
 
-%% API
-
+%%
+%% API Implementation
+%%
 init({tcp, http}, Req, [DocRoot, FileReadBuffer]) ->
     {ok, Req, #state{docroot = DocRoot, filereadbuffer = FileReadBuffer}}.
 
 handle(Req, S) ->
-    {Filename, Req1} = cowboy_http_req:raw_path(Req),
-    Docroot = S#state.docroot,
-    FullPath = << Docroot/bits, $/, Filename/bits >>,
+    {FullPath, Req1} = get_full_path(Req, S),
     case open_file(FullPath) of
-	{ok, IoDevice} ->
-	    {ok, Req2} = send_headers(Req1, Filename),
-	    Chunkfun = fun(Data) -> cowboy_http_req:chunk(Data, Req2) end,
-	    ok = send_file(IoDevice, 0, Chunkfun, S#state.filereadbuffer),
-	    {ok,  Req2, S};
-	error ->
-	    {ok, Req2} = cowboy_http_req:reply(404, [], <<"File not found.">>, Req1),
-	    {ok, Req2, S}
+	{ok, IoDevice} -> reply_full_file(Req1, FullPath, IoDevice, S);
+	error          -> reply_error(Req1, S)
     end.
 
 terminate(_Req, _State) ->
@@ -54,13 +46,36 @@ terminate(_Req, _State) ->
 
 %% Dev API
 
-doit(FullPath, FileReadBuffer) ->
+do_test(FullPath, FileReadBuffer) ->
     {ok, IoDevice} = open_file(FullPath),
     ok = send_file(IoDevice, 0, fun(Data) -> io:format("~s", [Data]) end, FileReadBuffer).
 
-%% Implementation
+%% Internal Functions
+
+reply_full_file(Req, Filename, IoDevice, S) ->
+    {ok, Req1} = send_headers(Req, Filename),
+    Chunkfun = fun(Data) -> cowboy_http_req:chunk(Data, Req1) end,
+    ok = send_file(IoDevice, 0, Chunkfun, S#state.filereadbuffer),
+    {ok,  Req1, S}.
+
+reply_error(Req, S) ->
+    {ok, Req1} = cowboy_http_req:reply(404, [], <<"File not found.">>, Req),
+    {ok, Req1, S}.
+
+get_full_path(Req, S) ->
+    case cowboy_http_req:raw_path(Req) of
+	{<< $/, Filename>>, Req1} -> true;
+	{Filename, Req1} -> true
+    end,
+    Suffix = case binary:last(Filename) of
+		 $/ -> << "index.html" >>;
+		 _ -> << "" >>
+	     end,
+    Docroot = S#state.docroot,
+    {<< Docroot/bits, Filename/bits, Suffix/bits >>, Req1}.
 
 open_file(FullPath) ->
+    error_logger:info_msg("~nOpening... '~s'~n", [FullPath]),
     file:open(FullPath, [read, binary]).
 
 send_headers(Req, Filename) ->
@@ -75,7 +90,6 @@ send_file(IoDevice, Position, StreamFun, FileReadBuffer) ->
 	eof -> ok
     end.
 	
-%% get content type
 get_content_type(FileName) ->
     case filename:extension(FileName) of
 	%% most common first

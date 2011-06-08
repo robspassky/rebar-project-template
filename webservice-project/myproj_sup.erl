@@ -26,6 +26,6 @@ start_link() ->
 
 init([]) ->
     Children = [
-		?CHILD({{projectid}}, worker) 
+		?CHILD({{projectid}}_cowboy, worker) 
 		],
     {ok, { {one_for_one, 5, 10}, Children} }.
